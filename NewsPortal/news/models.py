@@ -21,9 +21,9 @@ class Author(models.Model):
         cmmrtng += coRe.get('SumComsRating')
 
         # суммарный рейтинг всех комментариев к статьям автора
-        copoRe = self.post_set.comment_set.aggregate(SumPostComsRating = Sum('rating'))
+        # copoRe = self.post_set.comment.aggregate(SumPostComsRating = Sum('rating'))
         cprtng = 0
-        cprtng += copoRe.get('SumPostComsRating')
+        # cprtng += copoRe.get('SumPostComsRating')
 
         self.rating = pstrtng * 3 + cmmrtng + cprtng
         self.save()

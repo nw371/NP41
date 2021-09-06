@@ -47,6 +47,15 @@ class PostEdit(DetailView):
     template_name = 'edit.html'  # название шаблона будет product.html
     context_object_name = 'post'  # название объекта. в нём будет
 
+    def edit_post(self, request, *args, **kwargs):
+        form = self.context_object_name(request.POST)
+
+        if form.is_valid():  # если пользователь ввёл всё правильно и нигде не ошибся, то сохраняем новый товар
+            form.save()
+
+        return super().get(request, *args, **kwargs)
+
+
 class PostDelete(DetailView):
     model = Post  # модель всё та же, но мы хотим получать детали конкретно отдельного товара
     template_name = 'delete.html'  # название шаблона будет product.html

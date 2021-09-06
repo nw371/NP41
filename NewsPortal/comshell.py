@@ -7,7 +7,8 @@
 # python3 manage.py migrate
 
 #команда для запуска этого файла из оболочки джанги, т.к. запуск файла из терминала ругается матом - нет времени разбираться.
-# exec(open('comshell.py').read())
+# для операционной системы Linux: exec(open('comshell.py').read())
+# для поделия под названием Windows 10: exec(open('comshell.py', encoding='utf-8').read())
 
 #ГЕНЕРАТЦИЯ ДАННЫХ
 #сервис для генерации текстов: https://gsgen.ru/tools/fish-text/
@@ -81,7 +82,7 @@ if from_the_scratch:
 
     # Создать два объекта модели Author, связанные с пользователями.
     for n in range(1, authQTY):
-        globals()[f'author{n}'] = Author.objects.create(user = globals()[f'user{random.choice(range(0, usersQTY))}'])
+        globals()[f'author{n}'] = Author.objects.create(user = globals()[f'user{random.choice(range(1, usersQTY))}'])
 
     # Добавить 4 категории в модель Category
     for n in range(1, catQTY):
@@ -130,7 +131,7 @@ pid = 0 #сохраним сюда айди поста, чтобы потом и
 p = Post.objects.order_by('-rating')[:1].values()
 for i in p:
     print(f"Дата поста: {i['date']}")
-    print(f"Автор поста: {Author.objects.get(id=i['postAuthor_id']).user.username}")
+    print(f"Автор поста: {Author.objects.get(id=i['author_id']).user.username}")
     print(f"Рейтинг поста: {i['rating']}")
     print(f"Заголовок поста: {i['name']}")
     print(f"Предпросмотр поста: {Post.objects.get(id=i['id']).preview()}")
